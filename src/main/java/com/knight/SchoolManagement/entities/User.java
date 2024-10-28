@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,13 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID id;
-
     private LocalDate registration;
-
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<MonthlyFee> studentFees = new ArrayList<>();
 
     public User(){}
 
+    //Just for tests
     public User(UUID id, String name, LocalDate registration, String role) {
         this.id = id;
         this.name = name;
@@ -31,7 +35,7 @@ public class User {
     }
 
     //For add users with the current date
-   @JsonCreator
+    @JsonCreator
     public User(UUID id, String name, String role) {
         this.id = id;
         this.name = name;
@@ -65,6 +69,10 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public List<MonthlyFee> getStudentFees() {
+        return studentFees;
     }
 
     @Override

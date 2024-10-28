@@ -1,5 +1,6 @@
 package com.knight.SchoolManagement.Controllers;
 
+import com.knight.SchoolManagement.Repository.MonthlyFeeRepository;
 import com.knight.SchoolManagement.Services.UserService;
 import com.knight.SchoolManagement.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findById(id).orElseThrow(InputMismatchException::new));
     }
 
-    @PostMapping("/nu")
+    @PostMapping
     public ResponseEntity<User> newUser(@RequestBody User obj){
         return ResponseEntity.ok().body(userService.newUser(obj));
     }
