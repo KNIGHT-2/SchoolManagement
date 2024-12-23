@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.knight.SchoolManagement.entities.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +40,14 @@ public class UserService {
         }
 
         return obj;
+    }
+
+    //This method is for update the user's name
+    public Optional<User> updateUserData(UUID id, User obj){
+        Optional<User> user = userRepository.findById(id);
+        user.get().setName(obj.getName());
+        userRepository.save(user.get());
+        return user;
     }
 
     //This method is for the creation of a new fee
