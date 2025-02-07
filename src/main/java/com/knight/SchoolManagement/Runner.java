@@ -34,5 +34,7 @@ public class Runner implements CommandLineRunner {
         MonthlyFee fee = new MonthlyFee(200.0, LocalDate.now(), user1);
         monthlyFeeRepository.save(fee);
 
+
+
     }
 }

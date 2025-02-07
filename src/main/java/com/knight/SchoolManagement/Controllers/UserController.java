@@ -1,8 +1,8 @@
 package com.knight.SchoolManagement.Controllers;
 
-import com.knight.SchoolManagement.Repository.MonthlyFeeRepository;
 import com.knight.SchoolManagement.Services.UserService;
 import com.knight.SchoolManagement.entities.User;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +25,11 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable UUID id){
+
+        if (!userService.existsById(id)){
+            throw new EntityNotFoundException();
+        }
+
         return ResponseEntity.ok(userService.findById(id).orElseThrow(InputMismatchException::new));
     }
 
@@ -35,6 +40,24 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUserData(@PathVariable UUID id, @RequestBody User obj){
+
+        if (!userService.existsById(id)){
+            throw new EntityNotFoundException();
+        }
+
         return ResponseEntity.ok().body(userService.updateUserData(id, obj).get());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
+
+        if (!userService.existsById(id)){
+            throw new EntityNotFoundException();
+        }
+        userService.removeUser(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
