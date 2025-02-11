@@ -65,11 +65,13 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    //This endpoint is for return the disciplines that the user is registered,
+    // and also his frequency.
     @GetMapping("/{id}/frequencies")
     public ResponseEntity<List<Frequency>> findAllDisciplines (@PathVariable UUID id){
 
         List<Frequency> studentFrequencies = frequencyService
-                .findUserFrequencies(userService.findById(id).get());//.orElseThrow(() -> new EntityNotFoundException()));
+                .findUserFrequencies(userService.findById(id).orElseThrow(() -> new EntityNotFoundException()));
 
         return ResponseEntity.ok().body(studentFrequencies);
     }
