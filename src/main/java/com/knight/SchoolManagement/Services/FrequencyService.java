@@ -18,9 +18,10 @@ public class FrequencyService {
         return frequencyRepository.findAll();
     }
 
-    public List<Frequency> findUserFrequencies(User student){
+    //This method is to filter the frequencies that belong to the user
+    public List<Frequency> findUserFrequencies(User user){
         List<Frequency> userFrequencies = findAll().stream()
-                .filter(f -> f.getUser().getId().equals(student.getId())).toList();
+                .filter(f -> f.getUser().getId().equals(user.getId())).toList();
         return userFrequencies;
     }
 }
