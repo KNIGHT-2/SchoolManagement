@@ -55,7 +55,7 @@ public class Runner implements CommandLineRunner {
         mathFrequencies.addAll(Arrays.asList(new Frequency(null, 10, user),
                 new Frequency(null, 3, user1)));
 
-        englishFrequencies.addAll(Arrays.asList(new Frequency(null, 4, user2)));
+        englishFrequencies.addAll(Arrays.asList(new Frequency(null, 4, user2), new Frequency(null, 6, user1)));
 
         Discipline discipline1 = new Discipline(null, "Math", mathFrequencies);
         Discipline discipline2 = new Discipline(null, "English", englishFrequencies);
