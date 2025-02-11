@@ -1,6 +1,9 @@
 package com.knight.SchoolManagement.Controllers;
 
+import com.knight.SchoolManagement.Services.FrequencyService;
 import com.knight.SchoolManagement.Services.UserService;
+import com.knight.SchoolManagement.entities.Discipline;
+import com.knight.SchoolManagement.entities.Frequency;
 import com.knight.SchoolManagement.entities.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FrequencyService frequencyService;
 
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
@@ -59,5 +65,13 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/frequencies")
+    public ResponseEntity<List<Frequency>> findAllDisciplines (@PathVariable UUID id){
 
+        List<Frequency> studentFrequencies = frequencyService
+                .findUserFrequencies(userService.findById(id).get());//.orElseThrow(() -> new EntityNotFoundException()));
+
+        return ResponseEntity.ok().body(studentFrequencies);
+    }
 }
+
