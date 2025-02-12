@@ -40,14 +40,16 @@ public class Runner implements CommandLineRunner {
         userRepository.deleteAll();
 
 
-        User user = new User(null, "Bob", LocalDate.of(2024, 07, 15), "TEACHER");
-        User user1 = new User(null, "John", LocalDate.of(2023, 02, 28), "STUDENT");
-        User user2 = new User(null, "Ana", LocalDate.of(2022, 05, 10), "STUDENT");
+        User user = new User(null, "Bob", LocalDate.of(2024, 7, 15), "TEACHER");
+        User user1 = new User(null, "John", LocalDate.of(2023, 2, 28), "STUDENT");
+        User user2 = new User(null, "Ana", LocalDate.of(2022, 5, 10), "STUDENT");
 
         userRepository.saveAll(Arrays.asList(user, user1, user2));
 
-        MonthlyFee fee = new MonthlyFee(200.0, LocalDate.now(), user1);
-        monthlyFeeRepository.save(fee);
+        MonthlyFee fee = new MonthlyFee(200.0, LocalDate.now(), user2);
+        MonthlyFee fee1 = new MonthlyFee(200.0, LocalDate.of(2025, 1, 20), user1);
+
+        monthlyFeeRepository.saveAll(Arrays.asList(fee, fee1));
 
         List<Frequency> mathFrequencies = new ArrayList<>();
         List<Frequency> englishFrequencies = new ArrayList<>();

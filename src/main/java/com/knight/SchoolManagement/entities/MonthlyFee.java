@@ -1,6 +1,8 @@
 package com.knight.SchoolManagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -37,10 +39,12 @@ public class MonthlyFee {
         expiresOn = issuance.plusDays(7);
     }
     //Constructor that is used in other cases
-    public MonthlyFee(Double value, User user) {
+    @JsonCreator
+    public MonthlyFee(Double value/*, User user*/) {
+        //this.id = id;
         this.value = value;
         issuance = LocalDate.now();
-        this.user = user;
+        //this.user = user;
         expiresOn = issuance.plusDays(7);
     }
 
@@ -59,12 +63,15 @@ public class MonthlyFee {
     public User getUser() {
         return user;
     }
+    public void setUser(User user){
+        this.user = user;
+    }
 
     public Double getLateFee() {
         return lateFee;
     }
 
-    private Double getValue() {
+    public Double getValue() {
         return value;
     }
 
