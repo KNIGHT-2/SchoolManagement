@@ -29,4 +29,12 @@ public class MonthlyFeeController {
     public ResponseEntity<List<Double>> valuesToPay(@PathVariable UUID userId){
         return ResponseEntity.ok().body(monthlyFeeService.valuesToPay(userId));
     }
+    //This endpoint calls the method that adds a fee to all students and returns how many users had a monthly fee added.
+    @PostMapping
+    @RequestMapping("/toAllStudents")
+    public ResponseEntity<String> addFeeToAllStudents(@RequestBody MonthlyFee monthlyFee){
+        return ResponseEntity.ok().body("Monthly fee added to " + monthlyFeeService
+                .addFeeToAllStudents(monthlyFee).toString() + " users.");
+    }
+
 }
