@@ -3,6 +3,7 @@ package com.knight.SchoolManagement.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -15,10 +16,12 @@ public class Discipline {
     private UUID id;
     private String name;
 
-
     //@JsonIgnore
     @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Frequency> frequencies;
+
+    @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Note> notes;
 
     public Discipline(){}
 
@@ -50,6 +53,14 @@ public class Discipline {
 
     public void setFrequencies(List<Frequency> frequencies) {
         this.frequencies = frequencies;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
     }
 
     @Override

@@ -1,13 +1,7 @@
 package com.knight.SchoolManagement;
 
-import com.knight.SchoolManagement.Repository.DisciplineRepository;
-import com.knight.SchoolManagement.Repository.FrequencyRepository;
-import com.knight.SchoolManagement.Repository.MonthlyFeeRepository;
-import com.knight.SchoolManagement.Repository.UserRepository;
-import com.knight.SchoolManagement.entities.Discipline;
-import com.knight.SchoolManagement.entities.Frequency;
-import com.knight.SchoolManagement.entities.MonthlyFee;
-import com.knight.SchoolManagement.entities.User;
+import com.knight.SchoolManagement.Repository.*;
+import com.knight.SchoolManagement.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -31,6 +25,9 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     FrequencyRepository frequencyRepository;
+
+    @Autowired
+    NoteRepository noteRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -57,7 +54,8 @@ public class Runner implements CommandLineRunner {
         mathFrequencies.addAll(Arrays.asList(new Frequency(null, 10, user),
                 new Frequency(null, 3, user1)));
 
-        englishFrequencies.addAll(Arrays.asList(new Frequency(null, 4, user2), new Frequency(null, 6, user1)));
+        englishFrequencies.addAll(Arrays.asList(new Frequency(null, 4, user2),
+                new Frequency(null, 6, user1)));
 
         Discipline discipline1 = new Discipline(null, "Math", mathFrequencies);
         Discipline discipline2 = new Discipline(null, "English", englishFrequencies);
@@ -70,6 +68,9 @@ public class Runner implements CommandLineRunner {
         frequencyRepository.saveAll(mathFrequencies);
         frequencyRepository.saveAll(englishFrequencies);
 
+        Note note = new Note(8.2, user1, discipline1, "AV1");
+        Note note1 = new Note(7.9, user2, discipline2, "AV1");
+        noteRepository.saveAll(Arrays.asList(note, note1));
 
     }
 }

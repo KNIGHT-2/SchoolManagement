@@ -3,6 +3,7 @@ package com.knight.SchoolManagement.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -60,6 +61,11 @@ public class Frequency{
 
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
+    }
+
+    public List<Note> getStudentNotes(){
+        System.out.println(getDiscipline().getNotes());
+        return getDiscipline().getNotes();
     }
 
     @Override
