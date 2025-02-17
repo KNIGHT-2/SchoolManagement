@@ -3,6 +3,7 @@ package com.knight.SchoolManagement.Services;
 import com.knight.SchoolManagement.Repository.MonthlyFeeRepository;
 import com.knight.SchoolManagement.Repository.UserRepository;
 import com.knight.SchoolManagement.entities.MonthlyFee;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.knight.SchoolManagement.entities.User;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class UserService {
     }
 
     public Optional<User> findById(UUID id){
+
+        if (!existsById(id)){
+            throw new EntityNotFoundException();
+        }
+
         return userRepository.findById(id);
     }
 
@@ -47,6 +53,11 @@ public class UserService {
 
     //This method is for update the user's name
     public Optional<User> updateUserData(UUID id, User obj){
+
+        if (!existsById(id)){
+            throw new EntityNotFoundException();
+        }
+
         Optional<User> user = userRepository.findById(id);
         user.get().setName(obj.getName());
         userRepository.save(user.get());
@@ -54,6 +65,11 @@ public class UserService {
     }
 
     public void removeUser(UUID id){
+
+        if (!existsById(id)){
+            throw new EntityNotFoundException();
+        }
+
         userRepository.deleteById(id);
         System.out.println("User " + id + " deleted with success.");
     }

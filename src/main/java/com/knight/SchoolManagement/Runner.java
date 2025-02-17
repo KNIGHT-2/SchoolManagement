@@ -68,8 +68,8 @@ public class Runner implements CommandLineRunner {
         frequencyRepository.saveAll(mathFrequencies);
         frequencyRepository.saveAll(englishFrequencies);
 
-        Note note = new Note(8.2, user1, discipline1, "AV1");
-        Note note1 = new Note(7.9, user2, discipline2, "AV1");
+        Note note = new Note(8.2, discipline1, "AV1");
+        Note note1 = new Note(7.9, discipline2, "AV1");
         noteRepository.saveAll(Arrays.asList(note, note1));
 
     }

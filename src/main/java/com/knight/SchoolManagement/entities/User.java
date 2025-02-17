@@ -21,8 +21,11 @@ public class User {
     private LocalDate registration;
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MonthlyFee> studentFees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Frequency> frequencies;
 
     public User(){}
 

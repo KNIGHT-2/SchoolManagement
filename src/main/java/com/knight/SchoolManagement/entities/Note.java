@@ -16,11 +16,6 @@ public class Note {
     private AssessmentType assessmentType;
     private Double note;
 
-    //@JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private User student;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discipline_id")
     Discipline discipline;
@@ -33,9 +28,8 @@ public class Note {
 
     public Note(){}
 
-    public Note(Double note, User student, Discipline discipline, String assessmentType) {
+    public Note(Double note, Discipline discipline, String assessmentType) {
         this.note = note;
-        this.student = student;
         this.discipline = discipline;
         this.assessmentType = AssessmentType.valueOf(assessmentType);
     }
@@ -50,14 +44,6 @@ public class Note {
 
     public UUID getId() {
         return id;
-    }
-
-    public User getStudent() {
-        return student;
-    }
-
-    public void setStudent(User student) {
-        this.student = student;
     }
 
     public String getAssessmentType() {
