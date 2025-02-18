@@ -1,6 +1,7 @@
 package com.knight.SchoolManagement.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.knight.SchoolManagement.entities.DTO.UserDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -44,6 +45,10 @@ public class User {
         this.name = name;
         this.registration = LocalDate.now();
         this.role = Role.valueOf(role);
+    }
+
+    public UserDTO toDTO(User user){
+        return new UserDTO(user);
     }
 
     public String getName() {

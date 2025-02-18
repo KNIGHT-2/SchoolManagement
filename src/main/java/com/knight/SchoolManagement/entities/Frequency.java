@@ -1,6 +1,8 @@
 package com.knight.SchoolManagement.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.knight.SchoolManagement.entities.DTO.UserDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -43,8 +45,8 @@ public class Frequency{
         this.faults = faults;
     }
 
-    public User getUser() {
-        return user;
+    public UserDTO getUser() {
+        return user.toDTO(user);
     }
 
     @JsonIgnore
