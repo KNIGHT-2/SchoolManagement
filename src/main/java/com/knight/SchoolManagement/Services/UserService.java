@@ -36,10 +36,11 @@ public class UserService {
     }
 
     public User newUser(User newUser){
-        MonthlyFee firstFee = new MonthlyFee(200.0, LocalDate.now(), newUser);
+
         User obj = userRepository.save(newUser);
         //If the new user is a student, the first monthly fee will be automatically generated.
         if(newUser.getRole().equals(User.Role.STUDENT)) {
+            MonthlyFee firstFee = new MonthlyFee(200.0, LocalDate.now(), newUser);
             addFee(newUser, firstFee);
         }
 
