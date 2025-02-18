@@ -45,6 +45,7 @@ public class Frequency{
         this.faults = faults;
     }
 
+    //This method returns a DTO from the user associated in this frequency.
     public UserDTO getUser() {
         return user.toDTO(user);
     }

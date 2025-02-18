@@ -27,7 +27,8 @@ public class MonthlyFeeService {
 
         return repository.save(fee);
     }
-    //This method returns the values that and specific user have to pay (monthly fee value + late fee value).
+
+    //This method returns the values that a specific user have to pay (monthly fee value + late fee value).
     public List<Double> valuesToPay(UUID userId){
         List<MonthlyFee> fee = repository.findAll().stream().filter(f -> f.getUser().getId().equals(userId)).toList();
         List<Double> values = new ArrayList<>();
