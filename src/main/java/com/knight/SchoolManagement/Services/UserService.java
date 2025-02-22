@@ -6,6 +6,7 @@ import com.knight.SchoolManagement.entities.MonthlyFee;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.knight.SchoolManagement.entities.User;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -33,6 +34,10 @@ public class UserService {
         }
 
         return userRepository.findById(id);
+    }
+
+    public Optional<User> findByName(String name){
+        return userRepository.findByName(name);
     }
 
     public User newUser(User newUser){

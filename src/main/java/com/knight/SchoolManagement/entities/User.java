@@ -1,8 +1,10 @@
 package com.knight.SchoolManagement.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.knight.SchoolManagement.Controllers.dto.LoginRequest;
 import com.knight.SchoolManagement.entities.DTO.UserDTO;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class User {
     private UUID id;
     private LocalDate registration;
     private Role role;
+    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MonthlyFee> studentFees = new ArrayList<>();
@@ -31,18 +34,20 @@ public class User {
     public User(){}
 
     //Just for tests
-    public User(UUID id, String name, LocalDate registration, String role) {
+    public User(UUID id, String name, String password, LocalDate registration, String role) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.registration = registration;
         this.role = Role.valueOf(role);
     }
 
     //For add users with the current date
     @JsonCreator
-    public User(UUID id, String name, String role) {
+    public User(UUID id, String name, String password, String role) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.registration = LocalDate.now();
         this.role = Role.valueOf(role);
     }
@@ -83,6 +88,17 @@ public class User {
         return studentFees;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getPassword(){
+        return password;
+    }
+
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder){
+        return passwordEncoder.matches(loginRequest.password(), this.password);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,6 +114,7 @@ public class User {
 
     public enum Role {
         TEACHER,
-        STUDENT;
+        STUDENT,
+        ADMIN;
     }
 }

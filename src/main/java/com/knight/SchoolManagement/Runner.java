@@ -1,15 +1,18 @@
 package com.knight.SchoolManagement;
 
 import com.knight.SchoolManagement.Repository.*;
+import com.knight.SchoolManagement.Services.UserService;
 import com.knight.SchoolManagement.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -29,17 +32,32 @@ public class Runner implements CommandLineRunner {
     @Autowired
     NoteRepository noteRepository;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
+
         disciplineRepository.deleteAll();
         frequencyRepository.deleteAll();
         monthlyFeeRepository.deleteAll();
+        noteRepository.deleteAll();
         userRepository.deleteAll();
 
+        Optional<User> userAdmin = userRepository.findByName("Admin");
 
-        User user = new User(null, "Bob", LocalDate.of(2024, 7, 15), "TEACHER");
-        User user1 = new User(null, "John", LocalDate.of(2023, 2, 28), "STUDENT");
-        User user2 = new User(null, "Ana", LocalDate.of(2022, 5, 10), "STUDENT");
+        if(userAdmin.isPresent()){
+            System.out.println("Admin already exists.");
+        }else{
+            User user = new User(null, "Admin", bCryptPasswordEncoder.encode("1234"), LocalDate.now(), "ADMIN");
+            userRepository.save(user);
+        }
+
+
+
+        User user = new User(null, "Bob", "1234", LocalDate.of(2024, 7, 15), "TEACHER");
+        User user1 = new User(null, "John", "1234", LocalDate.of(2023, 2, 28), "STUDENT");
+        User user2 = new User(null, "Ana", "1234", LocalDate.of(2022, 5, 10), "STUDENT");
 
         userRepository.saveAll(Arrays.asList(user, user1, user2));
 
