@@ -36,7 +36,6 @@ public class TokenController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
 
         Optional<User> user = userService.findByName(loginRequest.name());
-        //Não está achando o objeto
 
         if (user.isEmpty() || !user.get().isLoginCorrect(loginRequest, bCryptPasswordEncoder)){
             throw new BadCredentialsException("Name or password is invalid.");
