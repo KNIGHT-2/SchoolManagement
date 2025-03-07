@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findById(id).orElseThrow(InputMismatchException::new));
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<User> newUser(@RequestBody User obj){
         return ResponseEntity.ok().body(userService.newUser(obj));
     }

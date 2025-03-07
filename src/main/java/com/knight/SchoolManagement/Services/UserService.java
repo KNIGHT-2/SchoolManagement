@@ -6,8 +6,11 @@ import com.knight.SchoolManagement.entities.MonthlyFee;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.knight.SchoolManagement.entities.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +25,9 @@ public class UserService {
 
     @Autowired
     MonthlyFeeRepository monthlyFeeRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<User> findAll(){
         return userRepository.findAll();
@@ -46,6 +52,10 @@ public class UserService {
 
     public User newUser(User newUser){
 
+        if(userRepository.findByEmail(newUser.getEmail()).isPresent()){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         User obj = userRepository.save(newUser);
         //If the new user is a student, the first monthly fee will be automatically generated.
         if(newUser.getRole().equals(User.Role.STUDENT)) {
