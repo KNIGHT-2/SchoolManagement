@@ -49,15 +49,15 @@ public class Runner implements CommandLineRunner {
         if(userAdmin.isPresent()){
             System.out.println("Admin already exists.");
         }else{
-            User user = new User(null, "Admin", bCryptPasswordEncoder.encode("1234"), LocalDate.now(), "ADMIN");
+            User user = new User(null, "admin@admin.com", "Admin", bCryptPasswordEncoder.encode("1234"), LocalDate.now(), "ADMIN");
             userRepository.save(user);
         }
 
 
 
-        User user = new User(null, "Bob", "1234", LocalDate.of(2024, 7, 15), "TEACHER");
-        User user1 = new User(null, "John", "1234", LocalDate.of(2023, 2, 28), "STUDENT");
-        User user2 = new User(null, "Ana", "1234", LocalDate.of(2022, 5, 10), "STUDENT");
+        User user = new User(null,"bob@email.com", "Bob", "1234", LocalDate.of(2024, 7, 15), "TEACHER");
+        User user1 = new User(null,"John@email.com", "John", "1234", LocalDate.of(2023, 2, 28), "STUDENT");
+        User user2 = new User(null,"ana@email.com", "Ana", "1234", LocalDate.of(2022, 5, 10), "STUDENT");
 
         userRepository.saveAll(Arrays.asList(user, user1, user2));
 

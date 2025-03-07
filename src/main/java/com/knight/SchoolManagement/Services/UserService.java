@@ -40,6 +40,10 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public User newUser(User newUser){
 
         User obj = userRepository.save(newUser);

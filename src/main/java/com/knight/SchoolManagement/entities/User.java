@@ -24,6 +24,7 @@ public class User {
     private LocalDate registration;
     private Role role;
     private String password;
+    private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MonthlyFee> studentFees = new ArrayList<>();
@@ -34,8 +35,9 @@ public class User {
     public User(){}
 
     //Just for tests
-    public User(UUID id, String name, String password, LocalDate registration, String role) {
+    public User(UUID id, String email, String name, String password, LocalDate registration, String role) {
         this.id = id;
+        this.email = email;
         this.name = name;
         this.password = password;
         this.registration = registration;
@@ -44,8 +46,9 @@ public class User {
 
     //For add users with the current date
     @JsonCreator
-    public User(UUID id, String name, String password, String role) {
+    public User(UUID id, String email, String name, String password, String role) {
         this.id = id;
+        this.email = email;
         this.name = name;
         this.password = password;
         this.registration = LocalDate.now();
@@ -93,6 +96,14 @@ public class User {
     }
     public String getPassword(){
         return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder){
