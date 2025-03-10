@@ -36,7 +36,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/users/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/fee/toAllStudents").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/fee/{userId}").hasRole("ADMIN")
                         .anyRequest().authenticated()).csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
