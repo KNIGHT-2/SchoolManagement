@@ -16,9 +16,11 @@ public class Note {
     private AssessmentType assessmentType;
     private Double note;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "discipline_id")
-    Discipline discipline;
+    private Discipline discipline;
+
 
     private enum AssessmentType{
         AV1,
@@ -52,6 +54,10 @@ public class Note {
 
     public void setAssessmentType(String assessmentType) {
         this.assessmentType = AssessmentType.valueOf(assessmentType);
+    }
+
+    public Discipline getDiscipline() {
+        return discipline;
     }
 
     @Override
