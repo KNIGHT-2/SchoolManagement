@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.knight.SchoolManagement.entities.DTO.UserDTO;
 import jakarta.persistence.*;
+import org.aspectj.weaver.ast.Not;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,9 @@ public class Frequency{
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
+    /*@OneToMany(mappedBy = "frequency", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Note> notes;
+*/
     public Frequency(){}
 
     @JsonCreator
@@ -80,8 +84,8 @@ public class Frequency{
     }
 
     public List<Note> getStudentNotes(){
-        System.out.println(getDiscipline().getNotes());
-        return getDiscipline().getNotes();
+        List<Note> notes = getDiscipline().getNotes().stream().filter(n -> n.getStudent().equals(this.user)).toList();
+        return notes;
     }
 
     @Override

@@ -60,8 +60,9 @@ public class FrequencyService {
     public Frequency addNoteToUser(NoteDTO noteDTO, UUID userId){
 
         Discipline discipline = disciplineService.findByName(noteDTO.name());
+        User student = userService.findById(userId);
 
-        Note note = new Note(noteDTO.note(), discipline, noteDTO.assessmentType());
+        Note note = new Note(student, noteDTO.note(), discipline, noteDTO.assessmentType());
 
         noteService.saveNote(note);
 

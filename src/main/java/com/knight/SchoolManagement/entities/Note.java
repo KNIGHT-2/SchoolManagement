@@ -21,6 +21,14 @@ public class Note {
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User student;
+
+    @ManyToOne
+    @JoinColumn(name = "frequency_id")
+    private Frequency frequency;
 
     private enum AssessmentType{
         AV1,
@@ -30,7 +38,8 @@ public class Note {
 
     public Note(){}
 
-    public Note(Double note, Discipline discipline, String assessmentType) {
+    public Note(User student, Double note, Discipline discipline, String assessmentType) {
+        this.student = student;
         this.note = note;
         this.discipline = discipline;
         this.assessmentType = AssessmentType.valueOf(assessmentType);
@@ -58,6 +67,22 @@ public class Note {
 
     public Discipline getDiscipline() {
         return discipline;
+    }
+
+    public User getStudent() {
+        return student;
+    }
+
+    public void setStudent(User student) {
+        this.student = student;
+    }
+
+    public Frequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Frequency frequency) {
+        this.frequency = frequency;
     }
 
     @Override

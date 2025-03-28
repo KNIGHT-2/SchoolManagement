@@ -38,6 +38,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/frequencies/insertUserIntoDiscipline/{userId}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/frequencies").hasRole("TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/api/frequencies").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/fee/toAllStudents").hasRole("ADMIN")
