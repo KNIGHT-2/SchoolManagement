@@ -21,7 +21,7 @@ public class MonthlyFeeService {
 
     public MonthlyFee saveFee(UUID id, MonthlyFee fee){
 
-        User student = userService.findById(id).orElseThrow(EntityNotFoundException::new);
+        User student = userService.findById(id);
 
         fee.setUser(student);
 

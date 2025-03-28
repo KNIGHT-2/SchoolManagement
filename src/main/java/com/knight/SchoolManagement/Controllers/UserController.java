@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable UUID id){
-        return ResponseEntity.ok(userService.findById(id).orElseThrow(InputMismatchException::new));
+        return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping("/register")
@@ -58,7 +58,7 @@ public class UserController {
     public ResponseEntity<List<Frequency>> findAllDisciplines (@PathVariable UUID id){
 
         List<Frequency> studentFrequencies = frequencyService
-                .findUserFrequencies(userService.findById(id).orElseThrow(() -> new EntityNotFoundException()));
+                .findUserFrequencies(userService.findById(id));
 
         return ResponseEntity.ok().body(studentFrequencies);
     }

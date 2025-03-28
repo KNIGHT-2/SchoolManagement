@@ -12,6 +12,7 @@ import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -75,5 +76,20 @@ public class FrequencyService {
         frequency.getDiscipline().setNotes(notes);
 
         return frequencyRepository.save(frequency);
+    }
+
+    @Transactional
+    public Frequency insertFrequencyToUser(UUID userId, String disciplineName){
+        Discipline discipline = disciplineService.findByName(disciplineName);
+
+        User user = userService.findById(userId);
+
+        Frequency frequency = new Frequency(null, user, discipline);
+
+        discipline.getFrequencies().add(frequency);
+
+        frequencyRepository.save(frequency);
+        disciplineRepository.save(discipline);
+        return frequency;
     }
 }

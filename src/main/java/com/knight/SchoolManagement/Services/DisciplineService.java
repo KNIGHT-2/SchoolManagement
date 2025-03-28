@@ -2,6 +2,7 @@ package com.knight.SchoolManagement.Services;
 
 import com.knight.SchoolManagement.Repository.DisciplineRepository;
 import com.knight.SchoolManagement.entities.Discipline;
+import com.knight.SchoolManagement.entities.Frequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

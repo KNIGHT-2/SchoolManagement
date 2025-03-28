@@ -1,6 +1,7 @@
 package com.knight.SchoolManagement;
 
 import com.knight.SchoolManagement.Repository.*;
+import com.knight.SchoolManagement.Services.FrequencyService;
 import com.knight.SchoolManagement.Services.UserService;
 import com.knight.SchoolManagement.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     FrequencyRepository frequencyRepository;
+
+    @Autowired
+    FrequencyService frequencyService;
 
     @Autowired
     NoteRepository noteRepository;
@@ -89,6 +93,16 @@ public class Runner implements CommandLineRunner {
         Note note = new Note(8.2, discipline1, "AV1");
         Note note1 = new Note(7.9, discipline2, "AV1");
         noteRepository.saveAll(Arrays.asList(note, note1));
+
+        User testUser = userRepository.findByName("Admin").get();
+        frequencyService.insertFrequencyToUser(testUser.getId(), "Math");
+
+        List<Frequency> userFrequencies = frequencyService.findUserFrequencies(testUser);
+        userFrequencies.forEach(s -> System.out.println(s.getDisciplineName()));
+
+        System.out.println("-----------------");
+        List<Frequency> frequencyLit = frequencyService.findAll();
+        frequencyLit.forEach(s -> System.out.println(s.getDisciplineName()));
 
     }
 }

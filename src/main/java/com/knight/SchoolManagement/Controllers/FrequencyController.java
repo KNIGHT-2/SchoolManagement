@@ -1,6 +1,7 @@
 package com.knight.SchoolManagement.Controllers;
 
 import com.knight.SchoolManagement.Services.FrequencyService;
+import com.knight.SchoolManagement.entities.DTO.DisciplineDTO;
 import com.knight.SchoolManagement.entities.DTO.NoteDTO;
 import com.knight.SchoolManagement.entities.Frequency;
 import com.knight.SchoolManagement.entities.Note;
@@ -35,5 +36,11 @@ public class FrequencyController {
     @RequestMapping(value = "/saveNote/{userId}")
     public ResponseEntity<Frequency> saveNoteToUser(@PathVariable UUID userId, @RequestBody NoteDTO noteDTO){
         return ResponseEntity.ok().body(frequencyService.addNoteToUser(noteDTO, userId));
+    }
+
+    @PostMapping
+    @RequestMapping(value = "/insertUserIntoDiscipline/{userId}")
+    public ResponseEntity<Frequency> insertIntoDiscipline(@PathVariable UUID userId, @RequestBody DisciplineDTO disciplineDTO){
+        return ResponseEntity.ok().body(frequencyService.insertFrequencyToUser(userId, disciplineDTO.disciplineName()));
     }
 }

@@ -33,13 +33,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(UUID id){
+    public User findById(UUID id){
 
         if (!existsById(id)){
             throw new EntityNotFoundException();
         }
 
-        return userRepository.findById(id);
+        return userRepository.findById(id).get();
     }
 
     public Optional<User> findByName(String name){

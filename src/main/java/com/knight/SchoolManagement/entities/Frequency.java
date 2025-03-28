@@ -21,11 +21,24 @@ public class Frequency{
     @JoinColumn(name = "student_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "discipline_id")
     private Discipline discipline;
 
     public Frequency(){}
+
+    @JsonCreator
+    public Frequency(User user){
+        this.user = user;
+        faults = 0;
+    }
+
+    public Frequency(UUID id, User student, Discipline discipline) {
+        this.id = id;
+        faults = 0;
+        this.user = student;
+        this.discipline = discipline;
+    }
 
     public Frequency(UUID id, Integer faults, User student) {
         this.id = id;
