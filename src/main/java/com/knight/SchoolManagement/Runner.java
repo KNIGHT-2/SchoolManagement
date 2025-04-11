@@ -108,11 +108,11 @@ public class Runner implements CommandLineRunner {
         List<Frequency> frequencyLit = frequencyService.findAll();
         frequencyLit.forEach(s -> System.out.println(s.getDisciplineName()));
 
-        /*var disciplineList = disciplineRepository.findAll();
+        var disciplineList = disciplineRepository.findAll();
         for(int i = 0; i < disciplineList.size(); i++){
             for(int j = 0; j < disciplineList.get(i).getNotes().size(); j++){
                 System.out.println(disciplineList.get(i).getNotes().get(j));
             }
-        }*/
+        }
     }
 }

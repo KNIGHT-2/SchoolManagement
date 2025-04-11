@@ -20,7 +20,7 @@ public class Discipline {
     @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Frequency> frequencies;
 
-    @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "discipline", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
 
     public Discipline(){}
