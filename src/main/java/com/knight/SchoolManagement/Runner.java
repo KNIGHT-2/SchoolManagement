@@ -60,10 +60,10 @@ public class Runner implements CommandLineRunner {
 
 
 
-        User user = new User(null,"bob@email.com", "Bob", "1234", LocalDate.of(2024, 7, 15), "TEACHER");
-        User user1 = new User(null,"John@email.com", "John", "1234", LocalDate.of(2023, 2, 28), "STUDENT");
-        User user2 = new User(null,"ana@email.com", "Ana", "1234", LocalDate.of(2022, 5, 10), "STUDENT");
-        User user3 = new User(null,"pietro@email.com", "Pietro", "1234", LocalDate.of(2023, 6, 19), "STUDENT");
+        User user = new User(null,"bob@email.com", "Bob", bCryptPasswordEncoder.encode("1234"), LocalDate.of(2024, 7, 15), "TEACHER");
+        User user1 = new User(null,"John@email.com", "John", bCryptPasswordEncoder.encode("1234"), LocalDate.of(2023, 2, 28), "STUDENT");
+        User user2 = new User(null,"ana@email.com", "Ana", bCryptPasswordEncoder.encode("1234"), LocalDate.of(2022, 5, 10), "STUDENT");
+        User user3 = new User(null,"pietro@email.com", "Pietro", bCryptPasswordEncoder.encode("1234"), LocalDate.of(2023, 6, 19), "STUDENT");
 
         userRepository.saveAll(Arrays.asList(user, user1, user2, user3));
 
