@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class TokenController {
@@ -44,8 +46,10 @@ public class TokenController {
         Instant now = Instant.now();
         Long expiresIn = 300L;
 
+        var roles = List.of(user.get().getRole());
+
         var claims = JwtClaimsSet.builder().issuer("mybackend").subject(user.get().getId().toString())
-                .issuedAt(now).expiresAt(now.plusSeconds(expiresIn)).build();
+                .issuedAt(now).expiresAt(now.plusSeconds(expiresIn)).claim("roles", roles).build();
 
         String jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
