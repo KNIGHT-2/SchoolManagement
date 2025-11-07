@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#MySQL folder from Docker
+mysql-data/
+
+# Logs
+*.log
