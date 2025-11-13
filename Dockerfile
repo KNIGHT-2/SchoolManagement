@@ -1,4 +1,4 @@
-FROM maven:4.0.0-rc-4-ibm-semeru-21-noble AS build
+FROM maven:3.9.11-eclipse-temurin-21 AS build
 
 WORKDIR /usr/src/SchoolApplication
 
@@ -10,7 +10,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 
-FROM eclipse-temurin:25_36-jdk
+FROM eclipse-temurin:21-jdk-noble
 COPY . /usr/src/SchoolApplication
 WORKDIR /usr/src/SchoolApplication
 EXPOSE 8080
