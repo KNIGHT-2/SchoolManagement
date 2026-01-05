@@ -1,0 +1,51 @@
+# 📌 Spring Boot + MySQL Project with Docker
+
+This project is a **Java Spring Boot** application integrated with **MySQL**, fully containerized using **Docker**.  
+It is designed to run seamlessly with a single command, making setup and execution straightforward.
+
+---
+
+## Technologies
+- [Java 17+](https://www.oracle.com/java/)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [MySQL](https://www.mysql.com/)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+## Project Structure
+
+├── src/                     # Application source code
+├── pom.xml                  # Maven configuration
+├── Dockerfile               # Application container build
+├── docker-compose.yml       # Service orchestration
+└── README.md                #Project documentation
+
+## Requirements
+ - Docker
+ - Docker Compose
+
+ ## Recommended tools
+ - Git (Recommended, but optional, as you can download the project's .zip file. If you are a Linux user some distributions already come with Git installed by default; you can check it using the following command: `git --version`)
+ - Postman (It is not required to run the application, but it is recommended for testing. Postman is a tool for testing APIs. You can call the application's endpoints in an easier and more practical way.)
+
+## Installing programs
+ - **Docker and Docker Compose** (Both are installed along with Docker Desktop). You can install by following this documentation:
+    |- Windows: https://docs.docker.com/desktop/setup/install/windows-install/
+    |- Linux: https://docs.docker.com/desktop/setup/install/linux/
+ - **Git** (If needed): You can follow this documentation: 
+    |- Windows: https://git-scm.com/install/windows
+    |- Linux: https://git-scm.com/install/linux
+ - **Postman** You can follow this documentation: 
+    https://learning.postman.com/docs/getting-started/installation/installation-and-updates/
+
+## Running the application
+ - If you are using Windows, open Git Bash in the directory where you want to run the project. If you are using Linux, simply open the terminal in the directory where you want to run the project.
+ - Clone the project by using the following command: `git clone git@github.com:KNIGHT-2/SchoolManagement.git`
+ - Use the command `cd SchoolManagement` to navigate to the application directory.
+ - Use the command `docker compose up` and wait for the application to start correctly.
+ - You can access the application at http://localhost:8080
+
+ ## Stopping the application
+ - Run the following command: `docker compose down` (You can run it in another terminal window, or Git Bash window, without problems.)
