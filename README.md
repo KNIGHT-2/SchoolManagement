@@ -16,11 +16,11 @@ It is designed to run seamlessly with a single command, making setup and executi
 
 ## Project Structure
 
-├── src/                     # Application source code
-├── pom.xml                  # Maven configuration
-├── Dockerfile               # Application container build
-├── docker-compose.yml       # Service orchestration
-└── README.md                #Project documentation
+📁 src/                      # Application source code
+📄 pom.xml                   # Maven configuration
+📄 Dockerfile                # Application container build
+📄 docker-compose.yml        # Service orchestration
+📘 README.md                 # Project documentation
 
 ## Requirements
  - Docker
