@@ -52,22 +52,81 @@ It is designed to run seamlessly with a single command, making setup and executi
  - It's important to remember that the application was built to be accessible only to students and staff of an educational institution. Therefore, the only way to create an account is if another account with administrator privileges does so.
 
    
-   | Method |  Endpoints                                     |    Role   |  Description             | 
-   |:------:|:----------------------------------------------:|:---------:|:------------------------:|
-   |  POST  |  /login                                        |    None   | This endpoint is used to log in to the application.|
-   |  POST  |  /users/register                               |    ADMIN  | This endpoint is used to register a new account in the application.|
-   |  POST  |  /frequencies/insertUserIntoDiscipline/{userId}|    ADMIN  | It is used to enroll a student or teacher in a subject.|
-   |  POST  |  /frequencies/saveNote/{userId}                |  TEACHER or ADMIN  |  Adds a grade for a student enrolled in the course.|
-   |  POST  |  /fee/{userId}                                 |  ADMIN |  Adds a monthly fee to a specific student. |
-   |  POST  |  /fee/toAllStudents                            |  ADMIN |  Add a monthly fee for all students. |
-   |  GET   |  /fee/{userId}/values                          |  Any   |  Find out the fees a student needs to pay. |
-   |  GET   |  /users/{userId}/frequencies                   |  TEACHER or ADMIN  |  Lists all the subjects a student or professor is enrolled in.  |
-   |  GET   |  /users                                        |  ADMIN |  Returns all users who are registered in the application. |
-   |  GET   |  /frequencies                                  |  Any | Returns all subjects, with grades and absences for students, that are registered in the system.|
-   |  GET   |  /frequencies/search?discipline=DISCIPLINE     |  Any   |  Returns grades and absences for students enrolled in a specific subject.|
-   |  PUT   |  /users/{userId}                               |  ADMIN |  Changes the user's registration data.  |
-   |  PUT   |  /frequencies/saveNote/{userId}                |  ADMIN or TEACHER  |  Changes the grade of a student enrolled in a subject.|
-   | DELETE |  /users/{userId}                               |   ADMIN   |   Delete a specific user. |
+   | Method |  Endpoints                                     |    Role   |  Description             | Examples of request body|
+   |:------:|:----------------------------------------------:|:---------:|:------------------------:|:-----------------------:|
+   |  POST  |  /login                                        |    Null   | This endpoint is used to log in to the application.|  [json](#post-login)   |
+   |  POST  |  /users/register                               |    ADMIN  | This endpoint is used to register a new account in the application.|[json](#post-usersregister)|
+   |  POST  |  /frequencies/insertUserIntoDiscipline/{userId}|    ADMIN  | It is used to enroll a student or teacher in a subject.|[json](#post-frequenciesinsertuserintodisciplineuserid)|
+   |  POST  |  /frequencies/saveNote/{userId}                |  TEACHER or ADMIN  |  Adds a grade for a student enrolled in the course.|[json](#post-frequenciessavenoteuserid)|
+   |  POST  |  /fee/{userId}                                 |  ADMIN |  Adds a monthly fee to a specific student. |[json](#post-feeuserid)|
+   |  POST  |  /fee/toAllStudents                            |  ADMIN |  Add a monthly fee for all students. |[json](#post-feetoallstudents)|
+   |  GET   |  /fee/{userId}/values                          |  Any   |  Find out the fees a student needs to pay. | |
+   |  GET   |  /users/{userId}/frequencies                   |  TEACHER or ADMIN  |  Lists all the subjects a student or professor is enrolled in.  | |
+   |  GET   |  /users                                        |  ADMIN |  Returns all users who are registered in the application. | |
+   |  GET   |  /frequencies                                  |  Any | Returns all subjects, with grades and absences for students, that are registered in the system.| |
+   |  GET   |  /frequencies/search?discipline=DISCIPLINE     |  Any   |  Returns grades and absences for students enrolled in a specific subject.| |
+   |  PUT   |  /users/{userId}                               |  ADMIN |  Changes the user's registration data.  |[json](#put-usersuserid)|
+   |  PUT   |  /frequencies/saveNote/{userId}                |  ADMIN or TEACHER  |  Changes the grade of a student enrolled in a subject.|[json](#put-frequenciessavenoteuserid)|
+   | DELETE |  /users/{userId}                               |   ADMIN   |   Delete a specific user. | |
+
+   ## Examples of request bodies:
+   # POST /login 
+```json
+{
+  "email": "admin@admin.com",
+  "password": "1234"
+}
+```
+   # POST /users/register  
+```json
+{
+    "name": "Isabell",
+    "email": "Isabell@email.com",
+    "role": "STUDENT",
+    "password": "1234"
+}
+```
+   # POST /frequencies/insertUserIntoDiscipline/{userId}
+```json
+{
+    "disciplineName": "Math"
+}
+```
+   # POST /frequencies/saveNote/{userId}  
+```json
+{
+  "note": "6.5",
+  "name" : "Math",
+  "assessmentType" : "AV2"
+}
+```
+   # POST /fee/{userId}
+```json
+{
+    "value": 350.99
+}
+```
+   # POST /fee/toAllStudents
+```json
+{
+    "value": 203.86
+}
+```
+   # PUT /users/{userId}
+```json
+{
+  "name": "Gabriel",
+  "role": "STUDENT"
+}
+```
+   # PUT /frequencies/saveNote/{userId} 
+```json
+{
+  "note": "2.5",
+  "name" : "Math",
+  "assessmentType" : "AV2"
+}
+```
 
 ## Stopping the application (You can run it in another terminal window, or Git Bash window, without problems, as long as it's in the program's directory.)
  - Run the following command to stop the application: `docker compose stop`
